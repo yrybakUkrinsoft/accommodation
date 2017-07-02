@@ -1,0 +1,15 @@
+# dependencies
+**/node_modules/**
+
+# IDE
+/.idea
+
+# misc
+npm-debug.log
+
+
+# tests
+/test
+
+#dist
+/dist
