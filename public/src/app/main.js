@@ -7,7 +7,7 @@ import Header from './view/Header/Header'
 import LeftMenu from './view/LeftMenu/Menu'
 import Overview from './view/Overview/Overview'
 
-const store = {};
+import store from './store'
 
 const router = (
     <Provider store={store}>

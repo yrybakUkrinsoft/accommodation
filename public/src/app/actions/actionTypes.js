@@ -1,0 +1,3 @@
+export const REVIEW = 'REVIEW';
+
+export const FILTER_TRAVELED_WITH = 'FILTER_TRAVELED_WITH';
