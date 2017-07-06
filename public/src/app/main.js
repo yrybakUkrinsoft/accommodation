@@ -5,7 +5,7 @@ import {Provider} from 'react-redux';
 
 import Header from './view/Header/Header'
 import LeftMenu from './view/LeftMenu/Menu'
-import Overview from './view/Overview/Overview'
+import Overview from './view/Overview'
 
 import store from './store'
 
