@@ -1,8 +1,8 @@
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import * as actions from '../../actions/reviews'
+import * as actions from 'actions/reviews'
 
-import Overview from './Overview'
+import Reviews from './Reviews'
 
 const mapStateToProps = state =>({
     reviews: state.reviews
@@ -14,9 +14,9 @@ const mapDispatchProps = dispatch => {
     }
 }
 
-const ReviewContainer = connect(
+const Container = connect(
     mapStateToProps,
     mapDispatchProps
-)(Overview)
+)(Reviews)
 
-export default  ReviewContainer;
+export default  Container;

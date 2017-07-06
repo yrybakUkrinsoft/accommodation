@@ -26,6 +26,8 @@ module.exports = {
         ],
         alias: {
             'app': resolve('app'),
+            'actions': resolve('app/actions'),
+            'reducers': resolve('app/reducers')
         }
     },
     devtool: '#cheap-module-eval-source-map',

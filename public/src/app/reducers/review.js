@@ -9,7 +9,7 @@ const reviews = (state = [], action = {}) => {
         case REVIEWS_SUCCESS:
             return Object.assign([], action.payload.reviews);
         case REVIEWS_FAIL:
-            return state;
+            return null;
         case REVIEWS_IN_PROCESS:
             return state;
         default:
