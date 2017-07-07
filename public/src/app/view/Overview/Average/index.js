@@ -5,7 +5,7 @@ import * as actions from 'actions/average'
 import Average from './Average'
 
 const mapStateToProps = state =>({
-    reviews: state.reviews
+    average: state.average
 })
 
 const mapDispatchProps = dispatch => {

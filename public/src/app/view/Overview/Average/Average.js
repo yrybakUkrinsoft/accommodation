@@ -2,99 +2,120 @@ import React from 'react';
 import {
     ListGroupItem
     , Button
-    ,ListGroup
-    ,MenuItem
+    , ListGroup
+    , MenuItem
     , Glyphicon
-    ,DropdownButton
-    ,Row
-    ,Col
+    , DropdownButton
+    , Row
+    , Col
     , Panel
+    , Alert
 } from 'react-bootstrap';
-
+import Spinner from '../Spinner/Spinner'
+import {traveledWith} from 'app/constants'
+import {normalizeValue, unCamelCase} from 'app/helpers'
+let h3Style = {
+    display: 'inline-block'
+    , margin: '0 15px 0 0'
+};
 export default class Overview extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             current: 'ALL'
             , opened: true
-            , traveledWith: [
-                , "ALL"
-                , "FAMILY"
-                , "OTHER"
-                , "COUPLE"
-                , "FRIENDS"
-                , "SINGLE"
-            ]
         }
     }
 
     componentWillMount() {
-        //this.props.getAverage()
+        this.props.getAverage()
     }
 
-    normalizeValue(value) {
-        return value.toLowerCase().replace(/\w/, w=>w.toUpperCase())
-    }
+
 
     renderTitles() {
-        return this.state.traveledWith.map((value, idx) => {
-            return <MenuItem eventKey={idx} onSelect={e=>this.onSelectTab(e)} key={idx}>
-                {this.normalizeValue(value)}
+        return traveledWith.map((value, idx) => {
+            return <MenuItem eventKey={idx} onSelect={e => this.onSelectTab(e)} key={idx}>
+                {normalizeValue(value)}
             </MenuItem>
         })
     }
 
     onSelectTab(idx) {
         this.setState({
-            current: this.state.traveledWith[idx]
+            current: traveledWith[idx]
         })
     }
 
     renderContent() {
-        return [{sdfsdf: 12}, {as232sd: 123}, {as232sd: 123}, {as232sd: 123}, {as232sd: 123}, {as232sd: 123}, {as232sd: 123}, {as232sd: 312},]
-            .map((el, idx)=> {
-                let key = Object.keys(el)[0];
-                let style = idx % 2 && {bsStyle: 'warning'}
-                return (
-                    <ListGroupItem {...style} key={idx}>
-                        {key}: {el[key]}
-                    </ListGroupItem>
-                )
-            })
+        let currentTab = this.state.current;
+        let currentObject = this.props.average[currentTab];
+        let dividedKeys = this.divideKeysByTwo(Object.keys(currentObject));
+
+        return dividedKeys[0].map((keyA, idx) => {
+            let keyB = dividedKeys[1][idx];
+            let keyC = dividedKeys[2][idx];
+            let style = idx % 2 && {bsStyle: 'warning'};
+            let renderCol = key => key ? <Col xs={4}><strong>{unCamelCase(key)}:</strong> {currentObject[key]}</Col> : '';
+
+            return <ListGroupItem {...style} key={idx}>
+                <Row>
+                    {renderCol(keyA)}
+                    {renderCol(keyB)}
+                    {renderCol(keyC)}
+                </Row>
+            </ListGroupItem>
+        })
+    }
+
+    divideKeysByTwo(keys) {
+        let first = [];
+        let second = [];
+        let third = [];
+        keys.forEach((e, i) => i % 3 === 0 ? first.push(e) : (i + 1) % 3 ? second.push(e) : third.push(e));
+        return [first, second, third]
     }
 
     switchPanel(e) {
-        e.preventDefault()
         this.setState({opened: !this.state.opened})
     }
 
     getPanelTitle() {
-        let glyphValue = this.state.opened ? 'chevron-up' : 'chevron-down'
-        let h3Style = {
-            display: 'inline-block'
-            , margin: '0 15px 0 0'
-        }
-        return <div>
-            <h3 style={h3Style}>Average values for {this.normalizeValue(this.state.current)}</h3>
-            <a href=""
-               onClick={ e=> this.switchPanel(e)}
-            >
-                <Glyphicon glyph={glyphValue} style={{color: 'white'}}/>
-            </a>
+        let glyphValue = this.state.opened ? 'chevron-up' : 'chevron-down';
+        return <div onClick={ () => this.switchPanel()}>
+            <h3 style={h3Style}>Average values for {normalizeValue(this.state.current)}</h3>
+            <Glyphicon glyph={glyphValue} style={{color: 'white'}}/>
         </div>
     }
 
+    getError() {
+        return (
+            <Alert bsStyle="danger">
+                <h3>
+                    Error!!!
+                </h3>
+                <p>
+                    Some problem happened. Please, click a button below for getting reviews again.
+                </p>
+                <br/>
+                <Button bsStyle="danger" onClick={() => this.props.getAverage()}>Get Average values</Button>
+            </Alert>
+        )
+    }
+
     render() {
+        if (this.props.average === null) return <Spinner/>;
+        if (this.props.average.message) return this.getError();
         return (
             <Row className="clearfix">
                 <Col sm={12}>
-                    <span>
-                        Please, chose the average of the rating of the accommodation:
-                    </span>
+                    <h3 style={h3Style}>You can chose any traveledWith value of the accommodation for the average computations:</h3>
                     <DropdownButton
+                        bsSize="xsmall"
                         bsStyle="warning"
-                        title={this.normalizeValue(this.state.current)}
-                        id="dd-trael-with"
+                        title={normalizeValue(this.state.current)}
+                        id="dd-travel-with"
+                        style={{marginBottom: '6px'}}
                     >
                         {this.renderTitles()}
                     </DropdownButton>

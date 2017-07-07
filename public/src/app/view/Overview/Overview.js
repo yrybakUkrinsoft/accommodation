@@ -6,7 +6,6 @@ export default () => {
     return (
         <div className="container">
             <Average/>
-            <br/>
             <Reviews/>
         </div>
     )

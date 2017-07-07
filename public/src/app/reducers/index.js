@@ -1,11 +1,11 @@
 import {combineReducers} from 'redux'
 
 import reviews from './review'
-import filters from './filters'
+import average from './average'
 
 const rootReducer = combineReducers({
     reviews
-    , filters
+    , average
 });
 
 export default rootReducer;

@@ -3,14 +3,16 @@ import {
     REVIEWS_FAIL,
     REVIEWS_IN_PROCESS
 } from './actionTypes'
+import {makeQs} from 'app/helpers'
 
-
-export const getReviews = () => {
+export const getReviews = filters => {
     return dispatch => {
         dispatch({
             type: REVIEWS_IN_PROCESS
         });
-        fetch('/api/v1/reviews')
+        filters = filters || {};
+        let query = makeQs(filters);
+        fetch('/api/v1/reviews?'+query)
             .then(response => {
                 if(response.status !== 200) {
                     throw new Error('Response status: '+response.status)
@@ -34,4 +36,4 @@ export const getReviews = () => {
                 })
             })
     }
-}
+};

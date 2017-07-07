@@ -4,12 +4,12 @@ import {
     REVIEWS_IN_PROCESS
 } from '../actions/actionTypes'
 
-const reviews = (state = [], action = {}) => {
+const reviews = (state = null, action = {}) => {
     switch (action.type) {
         case REVIEWS_SUCCESS:
             return Object.assign([], action.payload.reviews);
         case REVIEWS_FAIL:
-            return null;
+            return {message: action.message};
         case REVIEWS_IN_PROCESS:
             return state;
         default:

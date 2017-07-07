@@ -23,7 +23,7 @@ export const getAverage = () => {
                 dispatch({
                     type: AVERAGE_VALUES_SUCCESS,
                     payload: {
-                        average: result.reviews
+                        average: result.average
                     }
                 })
             })

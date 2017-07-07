@@ -4,8 +4,8 @@ import thunk from 'redux-thunk';
 import rootReducer from 'reducers/index';
 
 const defaultState = {
-    reviews: [],
-    filters: {},
+    reviews: null,
+    average: null
 };
 
 const store = createStore(
