@@ -16,15 +16,15 @@ Just a few things you need to do for starting the project:
     $ export NEW_VAR=SOMETHING
     ```
 3) Now you need to create tables in the DB:
-    - If you have the Navicat, here is the model for it: [navicat_model](./tree/master/navicat_model)
-    - Otherwise, here is generated file from the Navicat model: [tables.sql](./tree/master/lib/addition/tables.sql)
+    - If you have the Navicat, here is the model for it: [navicat_model](./navicat_model)
+    - Otherwise, here is generated file from the Navicat model: [tables.sql](./lib/addition/tables.sql)
 4) Now you are available for cloning and installing dependencies for this project.
     ```sh
     $ git clone https://github.com/woolfi182/accommodation.git
     $ cd accommodation
     $ npm i
     ```
-5) Now you can run the script for migration from the [reviews.json](./tree/master/mock/reviews.json) to the DB. For that you need:
+5) Now you can run the script for migration from the [reviews.json](./mock/reviews.json) to the DB. For that you need:
     ```sh
     $ npm run migration
     ```
