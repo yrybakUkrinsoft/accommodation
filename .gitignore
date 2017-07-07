@@ -9,6 +9,7 @@
 /.idea
 
 # misc
+errors.log
 npm-debug.log
 
 
