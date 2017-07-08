@@ -32,4 +32,6 @@ Just a few things you need to do for starting the project:
     ```sh
     $ npm start
     ```
+
+    Server will listen port 4000 as default
 7) Have fun!!!
